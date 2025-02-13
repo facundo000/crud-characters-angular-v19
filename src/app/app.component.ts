@@ -9,4 +9,15 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'crud-mk-characters';
+
+  mobileMenuOpen = false;
+  profileDropdownOpen = false;
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  toggleProfileDropdown(): void {
+    this.profileDropdownOpen = !this.profileDropdownOpen;
+  }
 }

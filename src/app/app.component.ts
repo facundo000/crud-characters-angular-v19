@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./shared/header/header.component";
+import { ListCharactersComponent } from './pages/list-characters/list-characters.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'crud-mk-characters';
 
-  mobileMenuOpen = false;
-  profileDropdownOpen = false;
-
-  toggleMobileMenu(): void {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
-  }
-
-  toggleProfileDropdown(): void {
-    this.profileDropdownOpen = !this.profileDropdownOpen;
-  }
 }

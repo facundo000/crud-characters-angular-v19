@@ -7,7 +7,7 @@ import { ListCharactersComponent } from './pages/list-characters/list-characters
 export const routes: Routes = [
     { path: '', redirectTo: 'personajes', pathMatch: 'full' },
     { path: 'personajes', component: ListCharactersComponent },
-    { path: 'detalle', component: DetailCharacterComponent },
+    { path: 'editar/:id', component: DetailCharacterComponent },
     { path: '404', component: Error404Component },
     { path: '**', redirectTo: '404' }
 ];

@@ -3,7 +3,7 @@
       <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
       @for(character of characters(); track $index){
           <article class="group relative">
-            <img [srcset]="character.no" [alt]="character.name" class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80">
+            <img [srcset]="character.no" [alt]="character.name" class="aspect-square w-full rounded-md bg-gray-200 object-cover  lg:aspect-auto lg:h-80" loading="lazy">
             <div class="mt-4 flex justify-between">
               <div>
                 <span class="mt-1 text-sm text-gray-500">{{character.name}}</span>

@@ -3,11 +3,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldControl, MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { CharactersService } from '../characters.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from '../interfaces/character.interface';
 import { switchMap, tap } from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-detail-character',
@@ -97,6 +99,44 @@ export class DetailCharacterComponent {
       this.tempImage.set(imageUrl);
       console.log(this.tempImage.set(imageUrl))
     }
+  }
+  deleteCharacter(): void {
+    const characterId = this.character()?._id;
+
+    if (!characterId) {
+      Swal.fire('Error', 'ID de personaje no válido', 'error');
+      return;
+    }
+
+    Swal.fire({
+      title: "¿Estas seguro de eliminarlo?",
+      text: "No vas a poder revertir la acción",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.charactersService.deleteCharacter(characterId).subscribe({
+          next: () => {
+            Swal.fire({
+              title: "¡Eliminado!",
+              text: "El personaje ha sido eliminado",
+              icon: "success"
+            });
+            this.router.navigate(['/personajes']);
+          },
+          error: (err:any) => {
+            Swal.fire({
+              title: "¡Error!",
+              text: `No se pudo eliminar, ${err}`,
+              icon: "error"
+            });
+          }
+        });
+      }
+    });
   }
 
 }

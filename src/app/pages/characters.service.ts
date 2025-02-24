@@ -20,5 +20,12 @@ export class CharactersService {
       catchError( error => of(undefined))
     )
   }
+  addCharacter( character: Character ): Observable<Character> {
+    return this.http.post<Character>(`http://localhost:3000/api/v1/mortalkombat`, character)
+  }
+
+  updateCharacter(id: string, character: Character): Observable<Character> {
+    return this.http.patch<Character>(`http://localhost:3000/api/v1/mortalkombat/${id}`, character);
+  }
 
 }

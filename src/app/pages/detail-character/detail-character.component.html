@@ -5,32 +5,48 @@
       <div class="w-full lg:sticky top-0 lg:col-span-3">
         <div class="flex flex-row gap-2">
           <div class="flex-1">
-            <img [src]="character()?.no" alt="Product" class="w-full  object-top object-cover"/>            
+            <img [src]="tempImage() || character()?.no" alt="Product" class="w-full  object-top object-cover"/>            
           </div>
         </div>
       </div>
   
       <div class="w-full lg:col-span-2 border-4 border-double border-fuchsia-600 p-5 ">
-          <!-- <form class="example-form" > -->
             <form class="example-form" [formGroup]="characterForm">
               <mat-form-field class="w-full lg:col-span-2">
                 <mat-label>Url de la Imagen</mat-label>
-                <!-- <mat-label>{{character()?.no}}</mat-label> -->
-                <!-- <input matInput placeholder="Ej; .png, .jpg, .webp" formControlName="superhero> -->
-                <input formControlName="no"  matInput
-                type="text">
+                <input 
+                formControlName="no"  
+                matInput
+                type="url"
+                >
+                <button 
+                    matSuffix 
+                    mat-icon-button 
+                    (click)="loadImage()"
+                    [disabled]="!characterForm.get('no')?.value"
+                    >
+                    <mat-icon>image_search</mat-icon>
+                  </button>
+                  <mat-hint>Formatos soportados: .png, .webp, .jpg</mat-hint>
                 
               </mat-form-field>
             
               <mat-form-field class="w-full lg:col-span-2">
                   <mat-label>Nombre del Personaje</mat-label>
                       <!-- <input matInput placeholder="Ej; Sektor"> -->
-                      <input formControlName="name"  matInput
-                      type="text">
+                      <input 
+                      formControlName="name"
+                      matInput
+                      type="text"
+                      >
               </mat-form-field>
   
                 <div class="flex justify-between">
-                  <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Guardar</button>
+                  <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  (click)="onSubmit()"
+                  >
+                    Guardar
+                  </button>
   
                   <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
                </div>

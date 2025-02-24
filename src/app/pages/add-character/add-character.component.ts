@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CharactersService } from '../characters.service';
 
 @Component({
   selector: 'app-add-character',
@@ -11,12 +12,37 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './add-character.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCharacterComponent { 
+
+
+export class AddCharacterComponent {
+  private charactersService = inject(CharactersService);
+
+  onSubmit(){
+    this.saveCharacter()
+  }
+
+  clearForm() {
+    this.characterForm.reset();
+    this.tempImage.set('');
+}
+saveCharacter() {
+  if(this.characterForm.valid){
+    const formData = {
+      ...this.characterForm.getRawValue(),
+      no: this.tempImage()
+    };
+    console.log('Datos a guardar:', formData);
+    this.charactersService.addCharacter(formData).subscribe({
+      next: () => this.handleSuccess(),
+      error: (err) => this.handleError(err)
+    })
+  }
+} 
   public characterForm = new FormGroup({
       name: new FormControl<string>('', { nonNullable: true }),
       no: new FormControl<string>('', { nonNullable: true })
   })
-  defaultImage = '/assets/noImage.png';  
+  defaultImage = 'https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg';  
   tempImage = signal<string>('');
 
   loadImage() {
@@ -24,5 +50,13 @@ export class AddCharacterComponent {
     if (imageUrl) {
       this.tempImage.set(imageUrl);
     }
+  }
+  private handleSuccess(): void {
+    alert('Saved successfully');
+    this.clearForm();
+  }
+
+  private handleError(err: any): void {
+    console.error('Error:', err);   
   }
 }

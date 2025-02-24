@@ -19,16 +19,20 @@ import { switchMap, tap } from 'rxjs';
 export class DetailCharacterComponent { 
   value = 'Clear me';
 
+  // isEditMode:boolean = false;
+
   public characterForm = new FormGroup({
-    id: new FormControl<string>('', { nonNullable: true }),
+    // id: new FormControl<string>('', { nonNullable: true }),
     name: new FormControl<string>('', { nonNullable: true }),
     no: new FormControl<string>('', { nonNullable: true })
   })
+  
+  // this.isEditMode = !!this.characterId;
 
   private charactersService = inject(CharactersService)
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly router = inject(Router);
   public characterWasFound = signal(true);
+  private router = inject(Router);
 
   public characterId =  signal(this.activatedRoute.params.pipe(
     tap(params => console.log('Params changed:', params)),
@@ -37,6 +41,7 @@ export class DetailCharacterComponent {
 
   // public character?: Character;
   character = signal<Character | undefined>(undefined);
+  tempImage = signal<string>('');
   
   
   ngOnInit(): void {
@@ -46,13 +51,52 @@ export class DetailCharacterComponent {
       )
       .subscribe({
         next: (response) => {
+          if (!response) {
+            this.router.navigate(['/']);
+            return;
+          }
           this.character.set(response);
-          this.characterForm.reset(response)
+          // this.characterForm.reset(response)
+          this.characterForm.patchValue({
+            name: response?.name,
+            no: response?.no
+          });          
           console.log(response)
         },
         error: (err) => console.log('Error', err)
 
       })
+  }
+  onSubmit() {
+    
+    if(this.characterForm.valid){
+
+      const id = this.activatedRoute.snapshot.params['id'];
+        const formData = this.characterForm.getRawValue();
+
+        console.log('Datos a guardar:', formData, id);
+
+        this.charactersService.updateCharacter(id, formData).subscribe({
+          next: () => this.handleSuccess(),
+          error: (err) => this.handleError(err)
+        })
+    }
+  }
+  private handleSuccess(): void {
+    alert('Saved successfully');
+    this.router.navigate(['/personajes']);
+  }
+
+  private handleError(err: any): void {
+    console.error('Error:', err);   
+  }
+
+  loadImage() {
+    const imageUrl = this.characterForm.get('no')?.value;
+    if (imageUrl) {
+      this.tempImage.set(imageUrl);
+      console.log(this.tempImage.set(imageUrl))
+    }
   }
 
 }

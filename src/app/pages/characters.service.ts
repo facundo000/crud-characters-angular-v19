@@ -20,6 +20,13 @@ export class CharactersService {
       catchError( error => of(undefined))
     )
   }
+
+  getCharacterByName(name: string): Observable<Character | undefined> {
+    return this.http.get<Character>(`http://localhost:3000/api/v1/mortalkombat/${name}`).pipe(
+      catchError( error => of(undefined))
+    )
+  }
+
   addCharacter( character: Character ): Observable<Character> {
     return this.http.post<Character>(`http://localhost:3000/api/v1/mortalkombat`, character)
   }

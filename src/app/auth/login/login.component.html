@@ -1,0 +1,17 @@
+<div class="login-container">
+    <h2>Acceso a la aplicación</h2>
+    
+    <ng-container *ngIf="(auth.isAuthenticated() | async) === false; else loggedIn">
+      <button (click)="auth.login()">Iniciar Sesión</button>
+      <button (click)="auth.signUp()">Registrarse</button>
+    </ng-container>
+        
+    <ng-template #loggedIn>
+      <div *ngIf="auth.getUser() | async as user">
+        <!-- <img [src]="user.picture" alt="Avatar"> -->
+        <h3>Bienvenido, {{user.name}}</h3>
+        <p>Email: {{user.email}}</p>
+      </div>
+      <button (click)="auth.logout()">Cerrar Sesión</button>
+    </ng-template>
+  </div>

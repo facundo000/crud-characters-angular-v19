@@ -28,7 +28,6 @@ export class HeaderComponent {
   @Output() search = new EventEmitter<string>();
 
   constructor() {
-    // this.setupSearch();
   }
 
   toggleMobileMenu(): void {

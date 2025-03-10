@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CharactersService } from '../characters.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-character',
@@ -16,6 +18,7 @@ import { CharactersService } from '../characters.service';
 
 export class AddCharacterComponent {
   private charactersService = inject(CharactersService);
+  private router = inject(Router);
 
   onSubmit(){
     this.saveCharacter()
@@ -52,8 +55,13 @@ saveCharacter() {
     }
   }
   private handleSuccess(): void {
-    alert('Saved successfully');
-    this.clearForm();
+    // alert('Saved successfully');
+    Swal.fire({
+          title: "¡Actualizado!", 
+          icon: "success",
+          draggable: true
+        });
+    this.router.navigate(['/personajes']);
   }
 
   private handleError(err: any): void {

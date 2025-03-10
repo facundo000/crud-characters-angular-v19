@@ -85,7 +85,12 @@ export class DetailCharacterComponent {
     }
   }
   private handleSuccess(): void {
-    alert('Saved successfully');
+    // alert('Saved successfully');
+    Swal.fire({
+      title: "¡Actualizado!", 
+      icon: "success",
+      draggable: true
+    });
     this.router.navigate(['/personajes']);
   }
 
@@ -115,7 +120,7 @@ export class DetailCharacterComponent {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Si, Eliminar"
     }).then((result) => {
       if (result.isConfirmed) {
         this.charactersService.deleteCharacter(characterId).subscribe({

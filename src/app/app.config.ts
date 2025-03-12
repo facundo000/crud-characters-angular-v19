@@ -18,7 +18,8 @@ export const appConfig: ApplicationConfig = {
       clientId: `${environment.CLIENT_ID}`,
       authorizationParams: {
         redirect_uri: window.location.origin,
-      }
+      },
+      cacheLocation: 'localstorage',
     }).providers || [])
   ]
 };

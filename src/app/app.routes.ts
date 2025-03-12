@@ -6,6 +6,7 @@ import { ListCharactersComponent } from './pages/list-characters/list-characters
 import { AddCharacterComponent } from './pages/add-character/add-character.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'personajes', pathMatch: 'full' },
@@ -13,7 +14,7 @@ export const routes: Routes = [
     { path: 'agregar-personaje', component: AddCharacterComponent },
     { path: 'editar/:id', component: DetailCharacterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
     { path: '404', component: Error404Component },
     { path: '**', redirectTo: '404' }
 ];

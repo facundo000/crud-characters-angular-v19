@@ -34,7 +34,7 @@ export class ListCharactersComponent {
       this.charactersService.getAllCharacters().subscribe({
         next: (response) => {        
           this.character.set(response);
-          console.log('Datos recibidos:', this.characters());
+          // console.log('Datos recibidos:', this.characters());
         },
           error: (err) => console.error('Error:', err)
         });

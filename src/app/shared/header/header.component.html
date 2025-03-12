@@ -36,7 +36,7 @@
 
               <a [routerLink]="'agregar-personaje'" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Agregar Personaje</a>
             </div>
-          </div>
+          </div>          
         </div>
 
         
@@ -68,27 +68,36 @@
           </button>
 
           <!-- Dropdown de perfil -->
-          <div class="relative ml-3 w-12">
-            <div>
-              <button type="button"
-                      class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-                      id="user-menu-button"
-                      aria-expanded=false
-                      aria-haspopup="true"
-                      (click)="toggleProfileDropdown()">
-                <span class="absolute -inset-1.5"></span>
-                <span class="sr-only">Open user menu</span>
-                <img class="size-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-              </button>
-            </div>
-  
-            @if(profileDropdownOpen) {
-              <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">Your Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-2">Sign out</a>
+          <div class="relative ml-3">
+            <!-- Mostrar dropdown solo si está autenticado -->
+            <ng-container *ngIf="isAuthenticated; else loginButtons">
+              <div>
+                <button type="button"
+                        class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        id="user-menu-button"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        (click)="toggleProfileDropdown()">
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img *ngIf="user" class="size-8 rounded-full" [src]="user.picture || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80'" alt="">
+                </button>
               </div>
-            }
+              
+              <div *ngIf="profileDropdownOpen" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">Tu Perfil</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">Configuración</a>
+                <a (click)="auth.logout()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" id="user-menu-item-2">Cerrar sesión</a>
+              </div>
+            </ng-container>
+            
+            <!-- Template para botones de login cuando no está autenticado -->
+            <ng-template #loginButtons>
+              <div class="flex space-x-2">
+                <button (click)="auth.login()" class="rounded-md px-3 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Iniciar Sesión</button>
+                <button (click)="auth.signUp()" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Registrarse</button>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

@@ -1,7 +1,5 @@
-<div class="login-container">
-    <h2>Acceso a la aplicación</h2>
-    
-    <ng-container *ngIf="(auth.isAuthenticated() | async) === false; else loggedIn">
+<div class="login-container ">    
+    <ng-container *ngIf="(auth.isAuthenticated() | async) === false; else loggedIn" class="block px-4 py-2 text-sm text-gray-700">
       <button (click)="auth.login()">Iniciar Sesión</button>
       <button (click)="auth.signUp()">Registrarse</button>
     </ng-container>

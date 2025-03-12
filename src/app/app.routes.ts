@@ -7,14 +7,17 @@ import { AddCharacterComponent } from './pages/add-character/add-character.compo
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './auth/auth.guard';
+import { CallbackComponent } from './pages/callback/callback.component';
+import { publicGuard } from './auth/public.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'personajes', pathMatch: 'full' },
     { path: 'personajes', component: ListCharactersComponent },
-    { path: 'agregar-personaje', component: AddCharacterComponent },
-    { path: 'editar/:id', component: DetailCharacterComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+    { path: 'agregar-personaje', component: AddCharacterComponent, canActivate: [authGuard] },
+    { path: 'editar/:id', component: DetailCharacterComponent, canActivate: [authGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [publicGuard] },
+    { path: 'perfil', component: ProfileComponent, canActivate: [authGuard] },
+    { path: 'callback', component: CallbackComponent },
     { path: '404', component: Error404Component },
     { path: '**', redirectTo: '404' }
 ];

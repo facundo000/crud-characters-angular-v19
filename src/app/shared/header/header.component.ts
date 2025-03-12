@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
@@ -29,6 +29,7 @@ export class HeaderComponent {
   private route = inject(ActivatedRoute);
   private charactersService = inject(CharactersService)
   public auth = inject(AuthzService)
+  private cdr = inject(ChangeDetectorRef);
 
   mobileMenuOpen = false;
   profileDropdownOpen = false;
@@ -66,14 +67,16 @@ export class HeaderComponent {
   ngOnInit() {
     // Suscribirse explícitamente al estado de autenticación
     this.authSub = this.auth.isAuthenticated().subscribe(auth => {
-      console.log('Estado de autenticación:', auth);
+      // console.log('Estado de autenticación:', auth);
       this.isAuthenticated = auth;
+      this.cdr.markForCheck();
     });
     
     // Suscribirse al usuario
     this.userSub = this.auth.getUser().subscribe(user => {
-      console.log('Datos del usuario:', user);
+      // console.log('Datos del usuario:', user);
       this.user = user;
+      this.cdr.markForCheck();
     });
   }
 

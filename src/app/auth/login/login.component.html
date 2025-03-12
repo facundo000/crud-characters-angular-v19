@@ -1,15 +1,18 @@
-<div class="login-container ">    
-    <ng-container *ngIf="(auth.isAuthenticated() | async) === false; else loggedIn" class="block px-4 py-2 text-sm text-gray-700">
-      <button (click)="auth.login()">Iniciar Sesión</button>
-      <button (click)="auth.signUp()">Registrarse</button>
-    </ng-container>
-        
-    <ng-template #loggedIn>
-      <div *ngIf="auth.getUser() | async as user">
-        <!-- <img [src]="user.picture" alt="Avatar"> -->
-        <h3>Bienvenido, {{user.name}}</h3>
-        <p>Email: {{user.email}}</p>
-      </div>
-      <button (click)="auth.logout()">Cerrar Sesión</button>
-    </ng-template>
+<div class="w-full min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-4xl px-4 py-20 bg-[#1e002b] text-center bg-gradient-to-b to-[#af00fc]/50 rounded-lg">
+    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      No estás autenticado
+    </h1>
+    <p class="text-gray-300 mb-10 max-w-2xl mx-auto">
+      Registrate o Inicia a sesión para poder realizar la acción
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <button (click)="auth.login()" class="px-6 py-3 bg-white text-gray-900 font-medium rounded-md hover:bg-gray-100 transition-colors">
+        Iniciar Sesión
+      </button>
+      <button (click)="auth.signUp()" class="px-6 py-3 text-white font-medium flex items-center hover:text-gray-300 transition-colors">
+        Registrarse
+      </button>
+    </div>
   </div>
+</div>

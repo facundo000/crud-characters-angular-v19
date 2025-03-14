@@ -27,7 +27,6 @@ export class ListCharactersComponent {
     this.route.queryParams.subscribe(params => {
       const searchTerm = params['search'];
       if(searchTerm) {
-        console.log('con filtro', this.currentSearchTerm())
         this.currentSearchTerm.set(searchTerm);
         this.searchCharacters(searchTerm);
       } else {

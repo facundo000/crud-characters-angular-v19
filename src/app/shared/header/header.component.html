@@ -32,9 +32,9 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <!-- Enlaces de navegación -->
-              <a [routerLink]="'personajes'" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</a>
+              <a [routerLink]="'personajes'" class="rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
 
-              <a [routerLink]="'agregar-personaje'" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Agregar Personaje</a>
+              <a [routerLink]="'agregar-personaje'" class="rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Agregar Personaje</a>
             </div>
           </div>          
         </div>
@@ -50,14 +50,14 @@
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
                   </svg>
               </div>
-              <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busqueda por nombre..." 
+              <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Busqueda por nombre..." 
               [(ngModel)]="searchTerm"
               (keyup.enter)="searchCharacter()"
               required />
           </div>
           <button 
           type="text" 
-          class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="p-2.5 ms-2 text-base font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           (click)="searchCharacter()"
           
           >
@@ -73,7 +73,7 @@
             @if (isAuthenticated) {
               <div>
                 <button type="button"
-                        class="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        class="relative flex rounded-full bg-gray-800 text-base focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                         id="user-menu-button"
                         aria-expanded="false"
                         aria-haspopup="true"
@@ -86,15 +86,15 @@
               
               @if (profileDropdownOpen) {
                 <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
-                  <a [routerLink]="'/perfil'" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">Tu Perfil</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">Configuración</a>
-                  <a (click)="auth.logout()" class="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" id="user-menu-item-2">Cerrar sesión</a>
+                  <a [routerLink]="'/perfil'" class="block px-4 py-2 text-base text-gray-700" role="menuitem" id="user-menu-item-0">Tu Perfil</a>
+                  <a href="#" class="block px-4 py-2 text-base text-gray-700" role="menuitem" id="user-menu-item-1">Configuración</a>
+                  <a (click)="auth.logout()" class="block px-4 py-2 text-base text-gray-700 cursor-pointer" role="menuitem" id="user-menu-item-2">Cerrar sesión</a>
                 </div>
               }
             } @else {
               <div class="flex space-x-2">
-                <button (click)="auth.login()" class="rounded-md px-3 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Iniciar Sesión</button>
-                <button (click)="auth.signUp()" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Registrarse</button>
+                <button (click)="auth.login()" class="rounded-md px-3 py-2 text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Iniciar Sesión</button>
+                <button (click)="auth.signUp()" class="rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Registrarse</button>
               </div>
             }
           </div>
@@ -107,7 +107,7 @@
       <div class="sm:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pt-2 pb-3">
           <a [routerLink]="'personajes'" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-          <a [routerLink]="'agregar-personaje'" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Agregar Personaje</a>
+          <a [routerLink]="'agregar-personaje'" class="rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Agregar Personaje</a>
         </div>
       </div>
     }

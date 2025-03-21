@@ -1,63 +1,81 @@
-<div class="font-[sans-serif] p-4">
-    <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
-      <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-8 max-lg:gap-12 max-sm:gap-8">
-        <div class="w-full lg:sticky top-0 lg:col-span-3">
-          <div class="flex flex-row gap-2">
-            <div class="flex-1">
-                    <img 
-                    [src]="tempImage() || defaultImage" 
-                    alt="imagen del personaje" 
-                    class="w-2xl object-top object-cover"                    
-                    />            
-            </div>
+<div class="p-4">
+  <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
+    <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-8 max-lg:gap-12 max-sm:gap-8">
+      <!-- Columna de imagen -->
+      <div class="w-full lg:sticky top-4 lg:col-span-3 h-fit">
+        <div class="flex flex-row gap-2">
+          <div class="flex-1 relative">
+            <img 
+              [src]="tempImage() || defaultImage" 
+              alt="imagen del personaje" 
+              class="w-full max-h-[70vh] aspect-auto object-contain rounded-xl border-4 border-double border-b-red-800 shadow-lg bg-gray-50"
+            />
           </div>
         </div>
-    
-        <div class="w-full lg:col-span-2 border-4 border-double border-fuchsia-600 p-5 ">
-              <form class="example-form"  [formGroup]="characterForm">
-                <mat-form-field class="w-full lg:col-span-2">
-                  <mat-label>URL de la Imagen</mat-label>
-                  <input 
-                    matInput 
-                    type="url" 
-                    formControlName="no"
-                    placeholder="Ej: https://ejemplo.com/imagen.jpg"
-                  >
-                  <button 
-                    matSuffix 
-                    mat-icon-button 
-                    (click)="loadImage()"
-                    [disabled]="!characterForm.get('no')?.value"
-                    >
-                    <mat-icon>image_search</mat-icon>
-                  </button>
-                  <mat-hint>Formatos soportados: .png, .webp, .jpg</mat-hint>
-                </mat-form-field>
-              
-                <mat-form-field class="w-full lg:col-span-2">
-                    <mat-label>Nombre del Personaje</mat-label>
-                        <input placeholder="Ej; Sektor"  matInput type="text" formControlName="name">
-                </mat-form-field>
-    
-                  <div class="flex justify-between">
-                    <button 
-                    type="button" 
-                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    (click)="saveCharacter()"
-                    >
-                    Guardar
-                  </button>
-    
-                    <button 
-                    type="button" 
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
-                    (click)="clearForm()"
-                    >
-                    Limpiar
-                  </button>
-                 </div>
-            </form>
-        </div>        
       </div>
+
+      <!-- Columna del formulario -->
+      <div class="w-full lg:col-span-2 border-4 border-double border-b-red-800 p-5 rounded-xl bg-white shadow-lg">
+        <form class="space-y-6" [formGroup]="characterForm">
+          <!-- Campo de URL de imagen mejorado -->
+          <mat-form-field class="w-full">
+            <mat-label class="font-medium text-withe-600">URL de la Imagen</mat-label>
+            <input 
+            matInput 
+            type="url" 
+            formControlName="no"
+            placeholder="Ej: https://ejemplo.com/imagen.jpg"
+            class="!pt-2 rounded-lg border-slate-200"
+            >
+            <button 
+              matSuffix 
+              mat-icon-button 
+              (click)="loadImage()"
+              [disabled]="!characterForm.get('no')?.value"
+              class="!-mr-2 hover:bg-slate-100/50 transition-colors"
+            >
+              <mat-icon class="hover:text-blue-600 transition-colors">image_search</mat-icon>
+            </button>
+            <mat-hint class="!text-xs text-slate-500">
+              Formatos: 
+              <span class="font-semibold text-blue-500">.png</span>, 
+              <span class="font-semibold text-emerald-500">.webp</span>, 
+              <span class="font-semibold text-amber-500">.jpg</span>
+            </mat-hint>
+          </mat-form-field>
+
+          <!-- Campo de nombre del personaje -->
+          <mat-form-field class="w-full">
+            <mat-label class="font-medium text-withe-600">Nombre del Personaje</mat-label>
+            <input 
+              placeholder="Ej: Sektor"  
+              matInput 
+              type="text" 
+              formControlName="name"
+              class="!pt-2 rounded-lg border-slate-200"
+            >
+          </mat-form-field>
+
+          <!-- Botones de acción -->
+          <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+            <button 
+              type="button" 
+              class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white  rounded-full transition-all shadow-md hover:shadow-lg active:scale-95"
+              (click)="saveCharacter()"
+            >
+              Guardar
+            </button>
+
+            <button 
+              type="button" 
+              class="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white  rounded-full transition-all shadow-md hover:shadow-lg active:scale-95"
+              (click)="clearForm()"
+            >
+              Limpiar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-  
+</div>

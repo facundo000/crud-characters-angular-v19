@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { CharactersService } from '../../pages/characters.service';
 import { LoginComponent } from "../../auth/login/login.component";
@@ -10,7 +10,7 @@ import { AuthzService } from '../../auth/authz.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

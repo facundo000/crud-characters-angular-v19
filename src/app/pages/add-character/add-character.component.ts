@@ -57,7 +57,7 @@ saveCharacter() {
   private handleSuccess(): void {
     // alert('Saved successfully');
     Swal.fire({
-          title: "¡Actualizado!", 
+          title: "¡Guardado Correctamente!", 
           icon: "success",
           draggable: true
         });

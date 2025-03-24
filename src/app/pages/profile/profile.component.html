@@ -1,10 +1,51 @@
-<div class="profile-container" *ngIf="auth.getUser() | async as user">
-    <h2>Perfil de Usuario</h2>
-    <div class="profile-card">
-      <img [src]="user.picture" alt="Avatar">
-      <h3>{{user.name}}</h3>
-      <p>Email: {{user.email}}</p>
-      <p>ID: {{user.sub}}</p>
-      <button (click)="auth.logout()">Cerrar Sesión</button>
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center p-4">
+  <div class="w-full max-w-md" *ngIf="auth.getUser() | async as user">
+    <div class="bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+      <div class="bg-gradient-to-r from-fuchsia-600 to-purple-600 h-24 relative">
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+          <img 
+            [src]="user.picture" 
+            alt="Avatar" 
+            class="w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg"
+          >
+        </div>
+      </div>
+      
+      <div class="pt-20 px-6 pb-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">{{user.name}}</h2>
+        <p class="text-gray-600 mb-4 truncate">{{user.email}}</p>
+        
+        <div class="bg-gray-100 rounded-lg p-4 mb-6 shadow-inner">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm text-gray-500">User ID</span>
+            <span class="text-sm font-medium text-gray-800 truncate max-w-[200px]">
+              {{user.sub}}
+            </span>
+          </div>
+        </div>
+        
+        <div class="flex flex-col space-y-4">
+          <button 
+          (click)="openEditProfile()"
+          class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 flex items-center justify-center space-x-2 cursor-pointer hover:cursor-crosshair"            
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>Editar Perfil</span>
+          </button>
+          
+          <button 
+            (click)="auth.logout()"
+            class="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition duration-300 flex items-center justify-center space-x-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
+</div>

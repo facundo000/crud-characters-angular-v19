@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListCharactersComponent { 
+  selectedCharacter: Character | null = null;
 
   character = signal<Character[] | undefined>([]);
   loading = signal<boolean>(false);
@@ -58,5 +59,13 @@ export class ListCharactersComponent {
         console.error('Search error:', error);
       }
     });
+  }
+
+  showFullImage(character: Character) {
+    this.selectedCharacter = character;
+  }
+
+  closeFullImage() {
+    this.selectedCharacter = null;
   }
 }

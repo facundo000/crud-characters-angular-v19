@@ -18,30 +18,24 @@
       <div class="w-full lg:col-span-2 border-4 border-double border-b-red-800 p-5 rounded-xl bg-white shadow-lg">
         <form class="space-y-6" [formGroup]="characterForm">
           <!-- Campo de URL de imagen mejorado -->
-          <mat-form-field class="w-full">
-            <mat-label class="font-medium text-withe-600">URL de la Imagen</mat-label>
+          <mat-form-field class="w-full lg:col-span-2">
+            <mat-label>Url de la Imagen</mat-label>
             <input 
-            matInput 
-            type="url" 
-            formControlName="no"
-            placeholder="Ej: https://ejemplo.com/imagen.jpg"
+            formControlName="no"  
+            matInput
+            type="url"
             class="!pt-2 rounded-lg border-slate-200"
             >
             <button 
-              matSuffix 
-              mat-icon-button 
-              (click)="loadImage()"
-              [disabled]="!characterForm.get('no')?.value"
-              class="!-mr-2 hover:bg-slate-100/50 transition-colors"
-            >
-              <mat-icon class="hover:text-blue-600 transition-colors">image_search</mat-icon>
+                matSuffix 
+                mat-icon-button 
+                (click)="loadImage()"
+                [disabled]="!characterForm.get('no')?.value"
+                >
+                <mat-icon>image_search</mat-icon>
             </button>
-            <mat-hint class="!text-xs text-slate-500">
-              Formatos: 
-              <span class="font-semibold text-blue-500">.png</span>, 
-              <span class="font-semibold text-emerald-500">.webp</span>, 
-              <span class="font-semibold text-amber-500">.jpg</span>
-            </mat-hint>
+              <mat-hint>Formatos soportados: .png, .webp, .jpg</mat-hint>
+            
           </mat-form-field>
 
           <!-- Campo de nombre del personaje -->

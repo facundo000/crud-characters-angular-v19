@@ -4,11 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ts-node set-env.js && ng build --configuration=production",
+    "build": "node set-env.prod.js && ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "prebuild": "ts-node set-env.prod.ts"
-
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

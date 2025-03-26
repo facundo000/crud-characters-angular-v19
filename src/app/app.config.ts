@@ -16,10 +16,10 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([authInterceptor])
     ),
     ...(AuthModule.forRoot({
-      domain: `${environment.auth0.domain}`,
-      clientId: `${environment.auth0.clientId}`,
+      domain: environment.auth0.domain,
+      clientId: environment.auth0.clientId,
       authorizationParams: {
-        audience: `${environment.auth0.audience}`,
+        audience: environment.auth0.audience,
         redirect_uri: window.location.origin,
         response_type: 'code',
         scope: 'openid profile email offline_access',
